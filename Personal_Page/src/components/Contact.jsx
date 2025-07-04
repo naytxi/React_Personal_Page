@@ -6,17 +6,31 @@ const Contact = () => {
     email: "",
   });
 
+const handleInputChange = (event) => {
+ console.log(event.target.name)
+ console.log(event.target.value)
 
+ setFormData({
+   ...formData,
+   [event.target.name]: event.target.value,
+ })
+};
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+    console.log("Form submitted:", formData);   
+
+};
   return(
     <>
     <h1>Contact</h1>
-    <form /*onSubmit={handleSubmit}*/>
+    <form onSubmit={handleSubmit}>
          <label>Name:</label>
        <input
          type="text"
          placeholder="name"
          value={formData.name}
-         /*onChange={handleInputChange}*/
+         onChange={handleInputChange}
          name="name"
        />
         <label>Email:</label>
@@ -24,7 +38,7 @@ const Contact = () => {
          type="email"
          placeholder="email"
          value={formData.email}
-         /*onChange={handleInputChange}*/
+         onChange={handleInputChange}
          name="email"
        />
        <button type="submit">Enviar</button>
