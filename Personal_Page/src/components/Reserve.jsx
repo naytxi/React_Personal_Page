@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import '../App.css';
 
-const Contact = () => {
+const Reserve = () => {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    date: "",
+    time: "",
+    guests: 1,
+    email: ""
   });
 
   const [btnDisabled, setBtnDisabled] = useState(true);
@@ -29,31 +32,58 @@ const Contact = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    localStorage.setItem("contactData", JSON.stringify(formData));
+    localStorage.setItem("reserveData", JSON.stringify(formData));
 
     navigate("/");
   };
 
   return (
     <div className="page-container">
-      <h1>Contact</h1>
+      <h1>Reserve a Table</h1>
       <form onSubmit={handleSubmit}>
         <label>Name:</label>
         <input
           type="text"
-          placeholder="name"
+          placeholder="Name"
           value={formData.name}
           onChange={handleInputChange}
           name="name"
         />
+
+        <label>Date:</label>
+        <input
+          type="date"
+          value={formData.date}
+          onChange={handleInputChange}
+          name="date"
+        />
+
+        <label>Time:</label>
+        <input
+          type="time"
+          value={formData.time}
+          onChange={handleInputChange}
+          name="time"
+        />
+
+        <label>Guests:</label>
+        <input
+          type="number"
+          min="1"
+          value={formData.guests}
+          onChange={handleInputChange}
+          name="guests"
+        />
+
         <label>Email:</label>
         <input
           type="email"
-          placeholder="email"
+          placeholder="Email"
           value={formData.email}
           onChange={handleInputChange}
           name="email"
         />
+
         <button type="submit" disabled={btnDisabled}>Enviar</button>
         <p>{message}</p>
       </form>
@@ -61,4 +91,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Reserve;
